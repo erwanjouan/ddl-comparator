@@ -1,10 +1,10 @@
 # DDL Comparator
 
-A Java 21 + Maven tool to compare SQL DDL schemas (tables, columns, indexes, foreign keys) between two environments.
+A Java 8 + Maven tool to compare SQL DDL schemas (tables, columns, indexes, foreign keys) between two environments.
 
 ## Requirements
 
-- Java 21+
+- Java 8+
 - Maven 3.8+
 
 ## Build
@@ -34,6 +34,10 @@ java -jar target/ddl-comparator-1.0.0-SNAPSHOT.jar \
 # Without colors (useful for CI logs)
 java -jar target/ddl-comparator-1.0.0-SNAPSHOT.jar \
   env_a.sql env_b.sql --no-color
+
+# MySQL dialect (default is Oracle)
+java -jar target/ddl-comparator-1.0.0-SNAPSHOT.jar \
+  env_a.sql env_b.sql --dialect MYSQL
 ```
 
 ## Exit codes
@@ -68,7 +72,8 @@ src/main/java/com/ddlcomparator/
 │   ├── TableDiff.java
 │   └── SchemaReport.java
 ├── extractor/
-│   └── DdlExtractor.java         ← JSQLParser-based DDL parser
+│   ├── DdlExtractor.java         ← JSQLParser-based DDL parser
+│   └── Dialect.java              ← ORACLE (default) / MYSQL
 ├── comparator/
 │   ├── ColumnComparator.java
 │   ├── IndexComparator.java
